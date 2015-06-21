@@ -1,0 +1,69 @@
+h1 {
+	color: #000000;
+	font-size: 20px;
+}
+h2 {
+    font-size: 24px;
+    line-height: 36px;
+}
+h3 {
+    color: #000099;
+    font-size: 24px;
+    line-height: 36px;
+}
+h4 {
+    color: #000099;
+    line-height: 36px;
+    margin-bottom: 5px;
+}
+
+.authors_or_tags{
+	margin: 25px;
+	min-width: 100px;
+
+}
+.authors_or_tags li{
+    color: #000099;
+	margin: 5px;
+}
+.blogs {
+    width: 100%;
+    overflow: hidden;
+}
+
+.blogs-left {
+    float: left;
+    width: 635px;
+    border-right: 1px solid #eee;
+    padding-right: 40px;
+}
+
+.blogs-right {
+    float: left;
+    padding-left: 20px;
+    width: 236px;
+}
+
+.best {
+    margin-bottom: 20px;
+}
+
+.question {
+	border: solid 1px #8B8989;
+	padding: 3px;
+	margin-left: 0px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.questiontext {
+	min-height: 100px;
+}
+
+.pagination a {
+    color: #808080;
+
+}
+.body {
+    background-color: #FF8866;
+}

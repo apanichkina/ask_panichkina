@@ -1,0 +1,56 @@
+root@ubuntu:/home/anna/ask_panichkina# ab -n 1000 -c 100 http://ask-panichkina.ru/helloworld/?a=5
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ask-panichkina.ru (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        ask-panichkina.ru
+Server Port:            80
+
+Document Path:          /helloworld/?a=5
+Document Length:        39 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.119 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      169000 bytes
+HTML transferred:       39000 bytes
+Requests per second:    8387.50 [#/sec] (mean)
+Time per request:       11.922 [ms] (mean)
+Time per request:       0.119 [ms] (mean, across all concurrent requests)
+Transfer rate:          1384.27 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   2.0      1       9
+Processing:     1    9   4.9      8      26
+Waiting:        1    7   4.6      6      26
+Total:          3   11   5.6     10      29
+
+Percentage of the requests served within a certain time (ms)
+  50%     10
+  66%     10
+  75%     13
+  80%     17
+  90%     20
+  95%     21
+  98%     23
+  99%     23
+ 100%     29 (longest request)
+root@ubuntu:/home/anna/ask_panichkina# 
+

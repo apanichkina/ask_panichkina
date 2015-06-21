@@ -1,0 +1,56 @@
+root@ubuntu:/home/anna/ask_panichkina# ab -n 1000 -c 100 http://ask-panichkina.ru:8082/?a=5
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ask-panichkina.ru (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        gunicorn/19.0.0
+Server Hostname:        ask-panichkina.ru
+Server Port:            8082
+
+Document Path:          /?a=5
+Document Length:        39 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.266 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      164000 bytes
+HTML transferred:       39000 bytes
+Requests per second:    3755.33 [#/sec] (mean)
+Time per request:       26.629 [ms] (mean)
+Time per request:       0.266 [ms] (mean, across all concurrent requests)
+Transfer rate:          601.44 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   11   7.4     10      31
+Processing:     1   15   8.1     13      38
+Waiting:        0   13   7.1     12      37
+Total:          9   26   7.9     24      59
+
+Percentage of the requests served within a certain time (ms)
+  50%     24
+  66%     28
+  75%     30
+  80%     31
+  90%     37
+  95%     37
+  98%     43
+  99%     58
+ 100%     59 (longest request)
+root@ubuntu:/home/anna/ask_panichkina# 
+

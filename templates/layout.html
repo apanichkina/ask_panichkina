@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ask_Panichkina</title>
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/css/style.css"/>
+		<script src="/css/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+	</head>
+	<body style="background-color: #d9edf7">
+        <div class="container">
+		<div class="navbar navbar-inverse">
+      		<div class="navbar-inner">
+        		<div class="container">
+          			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            			<span class="icon-bar"></span><span class="icon-bar"></span>
+           				<span class="icon-bar"></span>
+          			</button>
+          			<a class="brand" href="/">AskPanichkina</a>
+          			<div class="nav-collapse collapse">
+            			<ul class="nav">
+            				<form class="navbar-search pull-left">
+  								<input type="text" class="search-query" placeholder="Search" >
+  								<button class="navbar-btn btn-inverse" type="submit">
+                                    <i class="icon-search icon-white"></i>
+                                </button>
+                                <button class="btn btn-inverse"  type="submit" style = "margin: 5px">
+                                   <a  href="/ask_question">ASK!</a>
+                                </button>
+							</form>
+            			</ul>
+            			<ul class="nav pull-right"><!--
+                            <li><img class = "img-rounded" style = "margin: 5px" src="avatar.jpg" heigth="30" width="30" alt=""/></li>
+							<button type="button" class="btn btn-inverse" data-toggle="dropdown"  style="font-size: 12pt">username
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li> <a href="/ask_question">Settings</a> </li>
+                                <li> <a href="/logout">Log out</a> </li>
+                            </ul>
+                             -->
+              				<li>
+                				<a href="/signup">Sign up</a>
+              				</li>
+              				<li>
+                				<a href="/login">Log in</a>
+              				</li>
+
+            			</ul>
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+        </div>
+		<div class="container">
+  			<div class="row-fluid">
+    			<div class="span7 offset1">
+     		 		{% block main %}
+     		 		{% endblock %}
+    			</div>
+    			<div class="span3 offset1">
+    				<ul class="authors_or_tags">
+    					<h2>Popular Tags</h2>
+  						<li>Drugs</li>
+  						<li>Hope</li>
+					</ul>
+    				<ul class="authors_or_tags">
+    					<h2>Best Members</h2>
+  						<li>Dog</li>
+  						<li>Mr.Purpyr</li>
+					</ul>					
+     			 <!--Body content-->
+    			</div>
+  			</div>
+		</div>
+	</body>
+</html>
