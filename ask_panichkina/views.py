@@ -43,8 +43,8 @@ from ask_panichkina.models import Question, Tag, Answer, Profile, Rate_answer, R
 #    return HttpResponse(json.dumps(data), content_type = 'application/json')
 
 def index(request, order = ''):
-#   questions =Question.objects.all()
-#    questions = Question.objects.filter(is_deleted=0).order_by('-likes_num')
+    authenticated = 1
+
     if order == 'best':
         questions_sort = Question.objects.filter(is_deleted = 0).order_by('-likes_num')
     else:
@@ -58,7 +58,7 @@ def index(request, order = ''):
         questions = paginator.page(1)
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
-    return render(request,'index.html',{'questions' : questions, 'order':order})
+    return render(request,'index.html',{'questions' : questions, 'order':order, 'authenticated': authenticated})
 
 def question(request, id=0):
     question_id = int(id)
@@ -108,7 +108,7 @@ def signup(request):
     return render(request, 'signup.html',())
 
 def login(request):
-    return render(request, 'login.html', ())
+    return render(request, 'login.html',())
 
 def ask_question(request):
     return render(request, 'ask_question.html', ())
