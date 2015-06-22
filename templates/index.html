@@ -51,31 +51,21 @@
 		</div>
         {% endfor %}
 
+    <div class="pagination">
+    <span class="step-links">
+        {% if questions.has_previous %}
+            <a href="?page={{ questions.previous_page_number }}">previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ questions.number }} of {{ questions.paginator.num_pages }}
+        </span>
 
-	<div class="pagination">
-		<ul>
-			<li> <a href= "">First</a> </li>
-			<li>
-			{% if question_page.has_previous %}
-				<a href= "">Prev</a>
-			{% endif %}
-			</li>
-
-			{% for page in question_page.paginator.page_range %}
-			{% if page < max_page and page > min_page %}
-			<li class="{% if question_page.number == page %}active{% endif %} "> <a href=""> {{page}} </a> </li>
-			{% endif %}
-			{% endfor %}
-
-			<li>
-			{% if question_page.has_next %}
-				<a href= "">Next</a>
-			{% endif %}
-			</li>
-			<li> <a href= "">Last</a> </li>
-		</ul>
-    </div>
+        {% if questions.has_next %}
+            <a href="?page={{questions.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 
 
 {% endblock %}
