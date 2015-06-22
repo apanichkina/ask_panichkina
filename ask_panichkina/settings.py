@@ -44,7 +44,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -57,14 +57,19 @@ WSGI_APPLICATION = 'ask_panichkina.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'NAME':'ask_pan',
-        'USER':'asker',
-        'PASSWORD':'1234'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ask_anna',
+        'USER': 'askuser',
+        'PASSWORD': '1234',
+
     }
 }
+
+
 TEMPLATE_DIRS = {
     BASE_DIR + '/templates'
 }

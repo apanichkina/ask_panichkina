@@ -7,49 +7,52 @@
             <h2>Questions with tag: {{ tag }}</h2>
         </div>
     {% endif %}
-        <div class="btn-group" role="group">
-                      <a href="{% url 'index' 'new'%}" class="btn btn-default {% if order == 'new'%} active {% endif %}" role="button">New</a>
-                      <a href="{% url 'index' 'best'%}" class="btn btn-default {% if order == 'best'%} active {% endif %}" role="button">Best</a>
-                </div>
+    <div class="btn-group" role="group">
+        <a href="{% url 'index' 'new' %}" class="btn btn-default {% if order == 'new' %} active {% endif %}"
+           role="button">New</a>
+        <a href="{% url 'index' 'best' %}" class="btn btn-default {% if order == 'best' %} active {% endif %}"
+           role="button">Best</a>
+    </div>
 
-        {% for Question in questions %}
-		<div class = "question row panel panel-default" style="background-color: #ffffff">
-			<div class = "span3">
-				<div align="center">
-					<img src="/avatar.jpg" class="media-object" style="margin: 5px" width=150 heigth=150 alt=""/>
- 				</div>
- 				<div align="center">
-					 <h1>{{Question.author}}</h1>
-				</div>
+    {% for Question in questions %}
+        <div class="question row panel panel-default" style="background-color: #ffffff">
+            <div class="span3">
                 <div align="center">
-					<a class="btn btn-inverse" href="" data-liketype="q" data-vote="-" data-id="" data-url="/like">-</a>
+                    <img src="/avatar.jpg" class="media-object" style="margin: 5px" width=150 heigth=150 alt=""/>
+                </div>
+                <div align="center">
+                    <h1>{{ Question.author }}</h1>
+                </div>
+                <div align="center">
+                    <a class="btn btn-inverse" href="" data-liketype="q" data-vote="-" data-id="" data-url="/like">-</a>
                     <span class="badge">{{ Question.likes_num }}</span>
-					<a class="btn btn-inverse" href="" data-liketype="q" data-vote="+" data-id="" data-url="/like">+</a>
-				</div>
-			</div>
+                    <a class="btn btn-inverse" href="" data-liketype="q" data-vote="+" data-id="" data-url="/like">+</a>
+                </div>
+            </div>
 
-			<div class = "span5">
+            <div class="span5">
                 <h3><a href="{% url 'question' Question.id %}">{{ Question.title }}</a></h3>
 
-				<hr/>
-				<div class="questiontext">
-					<p>{{Question.text}}</p>
-				</div>
-			</div>
-			<div class="span5">
-			<p>{{Question.date}}</p>
-			<p>
-			<h4 href="/question?id={{Question.id}}">Answer ({{Question.answer_set.count}})</h4>
+                <hr/>
+                <div class="questiontext">
+                    <p>{{ Question.text }}</p>
+                </div>
+            </div>
+            <div class="span5">
+                <p>{{ Question.date }}</p>
+
+                <p>
+                <h4 href="/question?id={{ Question.id }}">Answer ({{ Question.answer_set.count }})</h4>
 				<span style="margin-left: 5%;">
                     <a>Tags:</a>
-					{% for tag in Question.tags.all %}
+                    {% for tag in Question.tags.all %}
                         <a href="{% url 'tag' tag.text %}">{{ tag.text }}</a>
                     {% endfor %}
 				</span>
-			</p>
-			</div>
-		</div>
-        {% endfor %}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
 
     <div class="pagination">
     <span class="step-links">
@@ -62,10 +65,10 @@
         </span>
 
         {% if questions.has_next %}
-            <a href="?page={{questions.next_page_number }}">next</a>
+            <a href="?page={{ questions.next_page_number }}">next</a>
         {% endif %}
     </span>
-</div>
+    </div>
 
 
 {% endblock %}

@@ -31,7 +31,9 @@ class Answer(models.Model):
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     likes_num = models.IntegerField(default=0)
-
+    is_right = models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.text
 
 class Profile(models.Model):
     user = models.OneToOneField(User)

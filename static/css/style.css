@@ -67,3 +67,16 @@ h4 {
 .body {
     background-color: #FF8866;
 }
+
+.answertext {
+	min-height: 100px;
+    margin-top: 5px;
+}
+
+.answer {
+	border: solid 1px #8B8989;
+	padding: 10px;
+	margin-left: 0px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}

@@ -50,7 +50,7 @@ def index(request, order = ''):
     else:
         questions_sort = Question.objects.filter(is_deleted = 0).order_by('-date')
     #list = Question.objects.all()
-    paginator = Paginator(questions_sort, 3)
+    paginator = Paginator(questions_sort, 20)
     page = request.GET.get('page')
     try:
         questions = paginator.page(page)
@@ -69,7 +69,16 @@ def question(request, id=0):
     if question.is_deleted == 1:
         raise Http404("This question is deleted")
     question.taglist = question.tags.all()
-    return render(request, 'question.html', {'question': question})
+    answers_set = Answer.objects.filter(question_id=id)
+    paginator = Paginator(answers_set, 30)
+    page = request.GET.get('page')
+    try:
+        answers = paginator.page(page)
+    except PageNotAnInteger:
+        answers = paginator.page(1)
+    except EmptyPage:
+        answers = paginator.page(paginator.num_pages)
+    return render(request, 'question.html', {'question': question, 'answers' : answers})
 
 def getQuestionParams(questions):
     for q in questions:
@@ -80,11 +89,18 @@ def getQuestionParams(questions):
 def sortbytag (request, tag=''):
     try:
         t = Tag.objects.get(text=tag)
-        questions = t.question_set.filter(is_deleted=0).order_by('-date')
+        questions_sort = t.question_set.filter(is_deleted=0).order_by('-date')
     except Tag.DoesNotExist:
-        questions = 0
+        questions_sort = 0
         raise Http404("Wrong tag")
-
+    paginator = Paginator(questions_sort, 20)
+    page = request.GET.get('page')
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
     return render(request, 'index.html', {'questions': questions,'tag': tag})
 
 
