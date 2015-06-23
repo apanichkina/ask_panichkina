@@ -18,7 +18,7 @@
         <div class="question row panel panel-default" style="background-color: #ffffff">
             <div class="span3">
                 <div align="center">
-                    <img src="/avatar.jpg" class="media-object" style="margin: 5px" width=150 heigth=150 alt=""/>
+                    <img src="/uploads/avatars/13687544312848.jpg" class="media-object" style="margin: 5px" width=150 heigth=150 alt=""/>
                 </div>
                 <div align="center">
                     <h1>{{ Question.author }}</h1>
@@ -42,7 +42,7 @@
                 <p>{{ Question.date }}</p>
 
                 <p>
-                <h4 href="/question?id={{ Question.id }}">Answer ({{ Question.answer_set.count }})</h4>
+                <h4><a href="{% url 'question' Question.id %}">Answer ({{ Question.answer_set.count }})</a></h4>
 				<span style="margin-left: 5%;">
                     <a>Tags:</a>
                     {% for tag in Question.tags.all %}

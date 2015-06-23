@@ -5,14 +5,18 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from django.contrib.auth import logout
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from ask_panichkina.forms import *
+from django.contrib.auth import authenticate, login
+
 import hashlib
 import os
 import json
 import datetime
 from ask_panichkina.models import Question, Tag, Answer, Profile, Rate_answer, Rate_profile, Rate_question
-#@csrf_exempt
+# @csrf_exempt
 #def helloworld(request):
 #	output = '<b>Hello World!Broooo</b><br />'
 #	if request.method == 'GET':
@@ -42,13 +46,12 @@ from ask_panichkina.models import Question, Tag, Answer, Profile, Rate_answer, R
 #    }
 #    return HttpResponse(json.dumps(data), content_type = 'application/json')
 
-def index(request, order = ''):
-    authenticated = 1
+def index(request, order=''):
 
     if order == 'best':
-        questions_sort = Question.objects.filter(is_deleted = 0).order_by('-likes_num')
+        questions_sort = Question.objects.filter(is_deleted=0).order_by('-likes_num')
     else:
-        questions_sort = Question.objects.filter(is_deleted = 0).order_by('-date')
+        questions_sort = Question.objects.filter(is_deleted=0).order_by('-date')
     #list = Question.objects.all()
     paginator = Paginator(questions_sort, 20)
     page = request.GET.get('page')
@@ -58,7 +61,8 @@ def index(request, order = ''):
         questions = paginator.page(1)
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
-    return render(request,'index.html',{'questions' : questions, 'order':order, 'authenticated': authenticated})
+    return render(request, 'index.html', {'questions': questions, 'order': order})
+
 
 def question(request, id=0):
     question_id = int(id)
@@ -78,7 +82,8 @@ def question(request, id=0):
         answers = paginator.page(1)
     except EmptyPage:
         answers = paginator.page(paginator.num_pages)
-    return render(request, 'question.html', {'question': question, 'answers' : answers})
+    return render(request, 'question.html', {'question': question, 'answers': answers})
+
 
 def getQuestionParams(questions):
     for q in questions:
@@ -86,7 +91,8 @@ def getQuestionParams(questions):
         q.taglist = q.tags.all()
     return questions
 
-def sortbytag (request, tag=''):
+
+def sortbytag(request, tag=''):
     try:
         t = Tag.objects.get(text=tag)
         questions_sort = t.question_set.filter(is_deleted=0).order_by('-date')
@@ -101,16 +107,60 @@ def sortbytag (request, tag=''):
         questions = paginator.page(1)
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {'questions': questions,'tag': tag})
+    return render(request, 'index.html', {'questions': questions, 'tag': tag})
 
-
-def signup(request):
-    return render(request, 'signup.html',())
 
 def login(request):
-    return render(request, 'login.html',())
+#    if request.user.is_authenticated():
+#       return HttpResponseRedirect("/")
+    errormsg = 0
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                errormsg = 'Disabled account'
+        else:
+            errormsg = 'Invalid login or password'
+    return render(request, 'login.html', {'errormsg' : errormsg})
+
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 def ask_question(request):
     return render(request, 'ask_question.html', ())
 
 
+def profile(request, name):
+    userpic = 0
+    if request.user.is_authenticated():
+        userpic = Profile.objects.get(user=int(request.user.id)).avatar
+    try:
+        user = User.objects.get(username=name)
+        profile = Profile.objects.get(user=user)
+        user.avatar = profile.avatar_url
+        user.rating = profile.rating
+    except User.DoesNotExist:
+        raise Http404
+    return render(request, 'profile.html', {'userpic': userpic, 'profile': user})
+
+
+def signup(request):
+
+    if request.method == 'POST':
+        form = SignupForm(request.POST, request.FILES)
+        if form.is_valid():
+            usr = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password'])
+            prof = Profile.objects.create(user_id=usr.id)
+            if(request.FILES):
+                prof.avatar = request.FILES['avatar']
+                prof.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form':form, })

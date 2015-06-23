@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span><span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="/">AskPanichkina</a>
+                <a class="brand" href="{% url 'index' '' %}">AskPanichkina</a>
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
@@ -25,27 +25,31 @@
                             <button class="navbar-btn btn-inverse" type="submit">
                                 <i class="icon-search icon-white"></i>
                             </button>
-                            <button class="btn btn-inverse" type="submit" style="margin: 5px">
-                                <a href="/ask_question">ASK!</a>
-                            </button>
+                            {% if user.is_authenticated %}
+                                <button class="btn btn-inverse" type="submit" style="margin: 5px">
+                                    <a href="{% url 'ask_question' %}">ASK!</a>
+                                </button>
+                            {% endif %}
                         </form>
                     </ul>
                     <ul class="nav pull-right">
-                        <li><img class="img-rounded" style="margin: 5px" src="/avatar.jpg" heigth="30" width="30"
-                                 alt=""/></li>
-                        <button type="button" class="btn btn-inverse" data-toggle="dropdown" style="font-size: 12pt">
-                            username
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="/ask_question">Settings</a></li>
-                            <li><a href="/logout">Log out</a></li>
-                        </ul>
-                        <!--
-                                                      <li><a href="/signup">Sign up</a></li>
-                                                      <li><a href="/login">Log in</a></li>
-                         -->
+                        {% if user.is_authenticated %}
+                            <button type="button" class="btn btn-inverse" data-toggle="dropdown"
+                                    style="font-size: 12pt">
+                                <img class="media" src="/uploads/{{ user.profile.avatar }}" width=25 heigth=25>
+                                {{ user.username }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'ask_question' %}">Settings</a></li>
+                                <li><a href="{% url 'logout' %}">Log out</a></li>
+                            </ul>
+                        {% else %}
+                            <li><a href="{% url 'signup' %}">Sign up</a></li>
+                            <li><a href="{% url 'login' %}">Log in</a></li>
+                        {% endif %}
                     </ul>
+
                 </div>
             </div>
         </div>

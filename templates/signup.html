@@ -1,82 +1,69 @@
 {% extends "layout.html" %}
+{% load widget_tweaks %}
 
 {% block main %}
-    <div class="container col-md-3">
-        <form class="form">
+        <h2 class="row">Registration</h2>
+        <form method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="row">
-                <div class="span8">
-                    <h2>Registration</h2>
-                    <br>
-
-                    <form method="post" action="/registration/signup" class="form-horizontal"
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="signup_form" value="register">
-
-                        <div class="row">
-                            <div class="span2">
-                                <label for="id_username">Username</label>
-                            </div>
-                            <div class="span5">
-                                <input id="id_username" name="username" type="text" required value="">
-                            </div>
-                        </div>
-                        <br>
-
-
-                        <div class="row">
-                            <div class="span2">
-                                <label for="id_email">Email address</label>
-                            </div>
-                            <div class="span5">
-                                <input id="id_email" name="email" type="email" required value="">
-                            </div>
-                        </div>
-                        <br>
-
-
-                        <div class="row">
-                            <div class="span2">
-                                <label for="id_password1">Password</label>
-                            </div>
-                            <div class="span5">
-                                <input id="id_password1" name="password1" type="password" required value="">
-                            </div>
-                        </div>
-                        <br>
-
-
-                        <div class="row">
-                            <div class="span2">
-                                <label for="id_password2">Password confirmation</label>
-                            </div>
-                            <div class="span5">
-                                <input id="id_password2" name="password2" type="password" required value="">
-                            </div>
-                        </div>
-                        <br>
-
-
-                        <div class="row">
-                            <div class="span2">
-                                <p>Upload avatar</p>
-                            </div>
-                            <div class="span5">
-
-                                <div><input id="id_avatar" name="avatar" type="file"></div>
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="row">
-                            <div class="span5 offset2">
-                                <button class="btn btn-outline-inverse btn-lg" type="submit">Register!</button>
-                                <input type="hidden" name="next" value="">
-                            </div>
-                        </div>
-                    </form>
+                <div class="span2">
+                    <label for="inputLogin">Login</label>
+                </div>
+                <div class="span5">
+                    {% render_field form.username class="form-control" required="required" placeholder="username" %}
+                    {% for error in form.username.errors %}
+                    <span class="label">{{ error }}</span>
+                    {% endfor %}
                 </div>
             </div>
-        </form>
+            <br>
+            <div class="row">
+                <div class="span2">
+                    <label for="inputEmail3">Email</label>
+                </div>
+                <div class="span5">
+                    {% render_field form.email class="form-control" required="required" placeholder="example@example.com" %}
+                    {% for error in form.email.errors %}
+                    <span class="label">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="span2">
+                    <label for="inputPassword3">Password</label>
+                </div>
+                <div class="span5">
+                    {% render_field form.password class="form-control" required="required" placeholder="" %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="span2">
+                    <label for="inputPassword4">Confirm password</label>
+                </div>
+                <div class="span5">
+                    {% render_field form.password_confirmation class="form-control" required="required" placeholder="" %}
+                    {% for error in form.password_confirmation.errors %}
+                    <span class="label">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="span2">
+                    <label for="exampleInputFile">Avatar</label>
+                </div>
+                <div class="span5">
+                    {{ form.avatar }}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="span5 offset2">
+                    <button type="submit" class="btn btn-primary">Sign up!</button>
+                </div>
 
-    </div> <!-- /container -->
+            </div>
+        </form>
 {% endblock %}

@@ -36,8 +36,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ask_panichkina'
+    'ask_panichkina',
+    'widget_tweaks',
 )
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,7 +50,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
 ROOT_URLCONF = 'ask_panichkina.urls'
 
 WSGI_APPLICATION = 'ask_panichkina.wsgi.application'
@@ -92,4 +93,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-uploads = '/uploads'
+uploads = '/uploads/'
+

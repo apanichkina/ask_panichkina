@@ -1,38 +1,45 @@
 {% extends "layout.html" %}
 
 {% block main %}
-   <div class="container col-md-3">
-  <form class="form">
+    <form method="post" class="form-horizontal">
+        {% csrf_token %}
+        <h2 class="row">Log in</h2>
 
-    <h2 class="row">Log in</h2>
-    <div class="row">
-        <div class="span2">
-			<label for="id_username">Login</label>
-		</div>
-		<div class="span5">
-			<input id="id_username" class="form-control" name="login" type="text" required>
-		</div>
-	</div>
-    <div class="row">
-        <div class="span2">
-            <label for="id_password">Password</label>
-		</div>
-		<div class="span5">
-			<input id="id_password" class="form-control" name="password" type="password" required>
-		</div>
-    </div>
-    <div class="row">
-        <div class="span5 offset2">
-            <button class="btn btn-outline-inverse btn-lg" type="submit">Log in!</button>
-            <input type="hidden" name="next" value="">
+        <div class="row">
+            <div class="span2">
+                <label for="id_username">Login</label>
+            </div>
+            <div class="span5">
+                <input id="id_username" class="form-control" name="username" type="text"
+                       id="username" placeholder="username" value="{% if username %}{{ username }}{% endif %}" required>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="span3 offset2">
-            <a href="/signup">Create new account</a>
-		</div>
-	</div>
-  </form>
+        <br>
 
-</div> <!-- /container -->
+        <div class="row">
+            <div class="span2">
+                <label for="id_password">Password</label>
+            </div>
+            <div class="span5">
+                <input id="id_password" class="form-control" name="password" placeholder="password"
+                       type="password" value="{% if password %}{{ password }}{% endif %}" required>
+            </div>
+        </div>
+        {% if errormsg %}
+            <div class="alert alert-danger" role="alert">{{ errormsg }}</div>
+        {% endif %}
+        <br>
+        <div class="row">
+            <div class="span5 offset2">
+                <button class="btn btn-primary" type="submit">Log in!</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span3 offset2">
+                <a href="{% url 'signup' %}">Create new account</a>
+            </div>
+        </div>
+    </form>
+
+
 {% endblock %}
